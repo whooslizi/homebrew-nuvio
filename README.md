@@ -1,4 +1,4 @@
-# Homebrew Nuvio
+# homebrew-nuvio
 
 Homebrew tap for [Nuvio Desktop](https://github.com/NuvioMedia/NuvioDesktop) on macOS.
 
@@ -28,9 +28,12 @@ brew update && brew upgrade --cask nuvio
 
 ## Auto upgrade daily
 
+Uses [homebrew-autoupdate](https://github.com/DomT4/homebrew-autoupdate):
+
 ```bash
-brew tap homebrew/autoupdate
-brew autoupdate start 86400 --upgrade --greedy
+brew tap domt4/autoupdate
+brew trust --command domt4/autoupdate/autoupdate
+brew autoupdate start 1d --upgrade --greedy --cleanup --immediate
 ```
 
 Check status:
@@ -69,3 +72,4 @@ To force a refresh, go to **Actions > Update Nuvio cask > Run workflow** and tic
 
 - [Nuvio](https://github.com/NuvioMedia/NuvioDesktop) by NuvioMedia
 - [Homebrew](https://brew.sh)
+- [homebrew-autoupdate](https://github.com/DomT4/homebrew-autoupdate) by DomT4
