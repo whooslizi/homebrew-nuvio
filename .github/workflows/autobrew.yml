@@ -44,4 +44,9 @@ jobs:
           fi
           VERSION="$(sed -nE 's/^  version "([^"]+)"/\1/p' Casks/nuvio.rb)"
           git commit -m "nuvio $VERSION"
-          git push
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            echo "Push failed, retry $i/5 in $((i * 15))s"
+            sleep $((i * 15))
+          done
+          exit 1
