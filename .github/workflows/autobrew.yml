@@ -1,0 +1,43 @@
+name: Update Nuvio cask
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Regenerate even if up to date
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-cask
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update cask
+        run: bash .github/scripts/update-cask.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE: ${{ inputs.force }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/nuvio.rb
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          VERSION="$(sed -nE 's/^  version "([^"]+)"/\1/p' Casks/nuvio.rb)"
+          git commit -m "nuvio $VERSION"
+          git push
