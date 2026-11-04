@@ -3,6 +3,10 @@ name: Update Nuvio cask
 on:
   schedule:
     - cron: "0 */6 * * *"
+  push:
+    paths:
+      - ".github/workflows/autobrew.yml"
+      - ".github/scripts/update-cask.sh"
   workflow_dispatch:
     inputs:
       force:
@@ -27,7 +31,7 @@ jobs:
         run: bash .github/scripts/update-cask.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FORCE: ${{ inputs.force }}
+          FORCE: ${{ github.event_name == 'push' || inputs.force }}
 
       - name: Commit and push
         run: |
