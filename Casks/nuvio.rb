@@ -1,15 +1,15 @@
 cask "nuvio" do
-  version "0.1.34-alpha"
+  version "0.1.35-alpha"
 
   on_arm do
-    sha256 "497856e825f4efe1a27d286de7925dc5b7abbd7644ec6b0ae2abdf6df4e75e94"
+    sha256 "927b9a29da9dd3215fecbb4108e7a91731e3583c9f8a4056d5635ba04a5db778"
 
-    url "https://github.com/NuvioMedia/NuvioDesktop/releases/download/#{version}/Nuvio-macOS-arm64-0.1.34-alpha.dmg"
+    url "https://github.com/NuvioMedia/NuvioDesktop/releases/download/#{version}/Nuvio-macOS-arm64-0.1.35-alpha.dmg"
   end
   on_intel do
-    sha256 "058e4657d5b08af08ca54e93d6aae0109c9af601251e6d29a35c688d16dbc517"
+    sha256 "6e652baca94bf7181a93d25fee977940cc350c92521819889f0b024341cd851e"
 
-    url "https://github.com/NuvioMedia/NuvioDesktop/releases/download/#{version}/Nuvio-macOS-x86_64-0.1.34-alpha.dmg"
+    url "https://github.com/NuvioMedia/NuvioDesktop/releases/download/#{version}/Nuvio-macOS-x86_64-0.1.35-alpha.dmg"
   end
 
   name "Nuvio"
