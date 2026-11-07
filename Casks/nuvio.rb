@@ -25,8 +25,7 @@ cask "nuvio" do
 
   uninstall quit: "com.nuvio.media.desktop"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Nuvio.app"]
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Nuvio.app"], must_succeed: false
   end
 end
