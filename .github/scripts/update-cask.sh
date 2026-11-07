@@ -106,9 +106,8 @@ $ARCH_BLOCK
 
   uninstall quit: "$BUNDLE_ID"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/$APP_NAME"]
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/$APP_NAME"], must_succeed: false
   end
 end
 EOF
